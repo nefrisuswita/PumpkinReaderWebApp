@@ -75,5 +75,3 @@ export function fetchNewsItems(category: Category): ThunkAction<void, ReducerSta
         .catch(err => dispatch({ type: 'SOME_ERROR', err }))
     }
 }
-
-// export function chose
