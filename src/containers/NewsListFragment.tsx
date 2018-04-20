@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import { News } from '../entities/News'
 import { newsItem } from '../components/NewsItem'
-import { ReducerState } from '../reducers';
+import { ReducerState } from '../reducers'
 
 interface NewsListProps {
     newsList: News[]
@@ -27,8 +27,10 @@ class NewsList extends React.Component<NewsListProps, {}> {
             )
         }
 
+        console.log("masuk render")
+
         return (
-            <ul>{this.renderList}</ul>
+            <ul>{this.renderList()}</ul>
         )
     }
 }

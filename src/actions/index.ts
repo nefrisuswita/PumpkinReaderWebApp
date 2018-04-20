@@ -13,12 +13,20 @@ export enum Category {
     FETCH_HN_JOBS = 'FETCH_HN_JOBS'
 } 
 
-export interface Action {
+export interface ActionNewsList {
     type: Category
     newsList: News[]
 }
 
-function receiveNewsList(category: Category, newsList: News[]): Action {
+export interface ActionCategory {
+    type: Category
+}
+
+export interface FetchNewsItems {
+    (category: String) : ThunkAction<void, ReducerState, any>
+}
+
+function receiveNewsList(category: Category, newsList: News[]): ActionNewsList {
     return {
         type: category,
         newsList: newsList
@@ -34,35 +42,38 @@ export function fetchSavedNews() {
 }
 
 export function fetchNewsItems(category: Category): ThunkAction<void, ReducerState, any> {
-    const apiCategory = 'topstories'
+    let apiCategory = 'topstories'
     switch(category) {
         case Category.FETCH_RECENT_NEWS:
-            this.apiCategory = 'newstories'
+            apiCategory = 'newstories'
             break
         case Category.FETCH_ASK_HN:
-            this.apiCategory = 'askstories'
+            apiCategory = 'askstories'
             break
         case Category.FETCH_SHOW_HN:
-            this.apiCategory = 'showstories'
+            apiCategory = 'showstories'
             break
         case Category.FETCH_HN_JOBS:
-            this.apiCategory = 'jobstories'
+            apiCategory = 'jobstories'
             break
     }
 
-    let newsItem: News[] = []
-    return dispatch => {
+    return (dispatch) => {
         return fetch(`https://hacker-news.firebaseio.com/v0/${apiCategory}.json`)
         .then(response => response.json())
         .then(ids => {
-            return Promise.all(ids.slice(0,10).map(
+            console.log("masuk done fetch top")
+            return Promise.all<News>(ids.slice(0,10).map(
                 (id: String) => {
                     return fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`)
                     .then(response => response.json())
-                    .then(response => newsItem.push(new News(response.url, response.title, response.id)))
+                    .then(response => new News(response.url, response.title, response.id))
                 })
             )
         })
-        .then(newsItems => dispatch(receiveNewsList(category, newsItem)))
+        .then(newsItems => dispatch(receiveNewsList(category, newsItems)))
+        .catch(err => dispatch({ type: 'SOME_ERROR', err }))
     }
 }
+
+// export function chose

@@ -1,9 +1,9 @@
-import { Category, Action } from '../actions'
+import { Category, ActionNewsList } from '../actions'
 import { News } from '../entities/News'
 
 export type State = News[]
 
-export function chosenNewsList(state: News[] = [], action: Action) {
+export function chosenNewsList(state: News[] = [], action: ActionNewsList) {
     switch(action.type) {
         case Category.FETCH_SAVED_NEWS:
         case Category.FETCH_TOP_NEWS:
