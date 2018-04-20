@@ -4,19 +4,17 @@ import { connect } from 'react-redux'
 import { ReducerState } from '../reducers'
 import { fetchNewsItems, FetchNewsItems, Category } from '../actions'
 
-interface NavigationState {
+interface NavigationProps {
     action: String
     fetchNewsItems: FetchNewsItems
 }
 
-class Navigation extends React.Component<NavigationState, {}> {
+class Navigation extends React.Component<NavigationProps, {}> {
     async componentWillMount() {
-        console.log("masuk componentWillMount")
         this.props.fetchNewsItems(this.props.action)
     }
 
     fetchBasedOnCategory(category: Category) {
-        console.log("masuk fetchBasedOnCategory")
         this.props.fetchNewsItems(category)
     }
 

@@ -13,6 +13,11 @@ export enum Category {
     FETCH_HN_JOBS = 'FETCH_HN_JOBS'
 } 
 
+export enum SavedListMoves {
+    ADD_SAVED_LIST = 'ADD_SAVED_LIST',
+    REMOVE_SAVED_LIST = 'REMOVE_SAVED_LIST' 
+}
+
 export interface ActionNewsList {
     type: Category
     newsList: News[]
@@ -22,28 +27,28 @@ export interface ActionCategory {
     type: Category
 }
 
+export interface ActionSavedNews {
+    type: SavedListMoves,
+    news: News
+}
+
 export interface FetchNewsItems {
     (category: String) : ThunkAction<void, ReducerState, any>
 }
 
-function receiveNewsList(category: Category, newsList: News[]): ActionNewsList {
-    return {
-        type: category,
-        newsList: newsList
-    }
-}
-
-export function fetchSavedNews() {
-    const newsList: News[] = []
-    return {
-        type: Category.FETCH_SAVED_NEWS,
-        newsList: newsList
-    }
-}
+// function fetchSavedNews() {
+//     const newsList: News[] = [new News('', 'lalalalallala', 1)]
+//     return {
+//         type: Category.FETCH_SAVED_NEWS,
+//         newsList: newsList
+//     }
+// }
 
 export function fetchNewsItems(category: Category): ThunkAction<void, ReducerState, any> {
     let apiCategory = 'topstories'
     switch(category) {
+        // case Category.FETCH_SAVED_NEWS:
+        //     return dispatch => dispatch(fetchSavedNews())
         case Category.FETCH_RECENT_NEWS:
             apiCategory = 'newstories'
             break
@@ -73,5 +78,12 @@ export function fetchNewsItems(category: Category): ThunkAction<void, ReducerSta
         })
         .then(newsItems => dispatch(receiveNewsList(category, newsItems)))
         .catch(err => dispatch({ type: 'SOME_ERROR', err }))
+    }
+}
+
+function receiveNewsList(category: Category, newsList: News[]): ActionNewsList {
+    return {
+        type: category,
+        newsList: newsList
     }
 }

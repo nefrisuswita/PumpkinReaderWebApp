@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 
-import { NewsList, NewsListProps } from '../components/NewsList'
 import { ReducerState } from '../reducers'
+import { NewsList, NewsListProps } from '../components/NewsList'
 
-class NewsListFragment extends React.Component<NewsListProps, {}> {
+class SavedNewsFragment extends React.Component<NewsListProps, {}> {
     render() {
         return (
             <div>
@@ -16,8 +16,8 @@ class NewsListFragment extends React.Component<NewsListProps, {}> {
 
 function mapStateToProps(state: ReducerState) {
     return {
-        newsList: state.newsList
+        newsList: state.savedNews
     }
 }
 
-export default connect(mapStateToProps)(NewsListFragment)
+export default connect(mapStateToProps)(SavedNewsFragment)
