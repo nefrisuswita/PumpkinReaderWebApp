@@ -1,17 +1,18 @@
 import { combineReducers } from 'redux'
-import { chosenNewsList, State } from './ChosenNewsList' 
-import { chosenCategory } from './SelectedCategory'
-import { savedNews } from './SavedNews'
+import { categoryNewsList, savedNews, newsDetail } from './News' 
+import { chosenCategory } from './Category'
 import { News } from '../entities/News'
 
 export const rootReducer = combineReducers({
     action: chosenCategory,
-    newsList: chosenNewsList,
-    savedNews: savedNews
+    newsList: categoryNewsList,
+    savedNews: savedNews,
+    newsDetail: newsDetail
 })
 
 export interface ReducerState {
     action: String, 
-    newsList: State,
-    savedNews: News[]
+    newsList: News[],
+    savedNews: News[],
+    newsDetail: News
 }

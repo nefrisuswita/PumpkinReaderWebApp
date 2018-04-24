@@ -1,15 +1,21 @@
 export class News {
-    url: String
-    title: String
     id: number
+    title: String
+    by: String
+    commentId: number[]
+    time: number
+    url: String
 
-    constructor(url: String, title: String, id: number) {
-        this.url = url
-        this.title = title
+    constructor(id: number, title: String, by: String, commentId: number[], time: number, url: String) {
         this.id = id
+        this.title = title
+        this.by = by
+        this.commentId = commentId
+        this.time = time
+        this.url = url
     }
 
-    static getNews(url: String, title: String, id: number): News {
-        return new News(url, title, id)
+    static getNews(id: number, title: String, by: String, commentId: number[], time: number, url: String): News {
+        return new News(id, title, by, commentId, time, url)
     }
 }

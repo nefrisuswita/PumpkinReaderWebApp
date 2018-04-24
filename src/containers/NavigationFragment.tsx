@@ -2,20 +2,20 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 
 import { ReducerState } from '../reducers'
-import { fetchNewsItems, FetchNewsItems, Category } from '../actions'
+import { fetchNewsList, FetchNewsList, Category } from '../actions'
 
 interface NavigationProps {
     action: String
-    fetchNewsItems: FetchNewsItems
+    fetchNewsList: FetchNewsList
 }
 
 class Navigation extends React.Component<NavigationProps, {}> {
     async componentWillMount() {
-        this.props.fetchNewsItems(this.props.action)
+        this.props.fetchNewsList(this.props.action)
     }
 
     fetchBasedOnCategory(category: Category) {
-        this.props.fetchNewsItems(category)
+        this.props.fetchNewsList(category)
     }
 
     render() {
@@ -52,5 +52,5 @@ function mapStateToProps(state: ReducerState) {
     }
 }
 
-export default connect(mapStateToProps, { fetchNewsItems }) (Navigation)
+export default connect(mapStateToProps, { fetchNewsList }) (Navigation)
 

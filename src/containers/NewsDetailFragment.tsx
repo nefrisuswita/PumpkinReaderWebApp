@@ -1,23 +1,20 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 
-interface ParamsType {
-    id: string
-}
+import { ReducerState } from '../reducers'
 
 interface PropsType {
-    params: ParamsType
+    id: String
 }
 
 class NewsDetailFragment extends React.Component<PropsType, {}> {
     render() {
         return (
             <div>
-                {this.props.params.id}
+                {this.props.id}
             </div>
         )
     }
 }
 
-
-export default connect(null)(NewsDetailFragment)
+export default connect<{}, {}, PropsType>(null)(NewsDetailFragment)
