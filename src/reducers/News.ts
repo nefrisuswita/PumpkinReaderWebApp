@@ -32,7 +32,7 @@ export interface NewsDetail {
     comment: Comment[]
 }
 
-export function newsDetail(state: NewsDetail = { news: null, comment: null}, action: ActionNewsDetail) {
+export function newsDetail(state: NewsDetail = { news: null, comment: []}, action: ActionNewsDetail) {
     switch(action.type) {
         case NewsDetailMoves.PUT_NEWS_DETAIL:
             return {...state, news: action.news}

@@ -1,33 +1,30 @@
 import * as React from 'react'
+import List from 'material-ui/List/List'
+
+import { putNewsDetail } from '../actions'
 
 import { News } from '../entities/News'
+import { NewsItem } from './NewsItem'
 
-export interface NewsListProps {
-    newsList: News[]
+export interface Props {
+    newsList: News[],
+    putNewsDetail: typeof putNewsDetail
 }
 
-
-export class NewsList extends React.Component<NewsListProps, {}> {
-    renderList() {
-        return this.props.newsList.map((news) => {
-            console.log('masuk judul ' + news.title)
-            return (
-                <li key = {news.id}>
-                    { news.title }
-                </li>
-            )
-        })
-    }
-
-    render() {
-        if (!this.props.newsList) {
-            return (
-                <div>Loading...</div>
-            )
-        }
-
+export const NewsList = (props: Props) => {
+    if (!props.newsList) {
         return (
-            <ul>{this.renderList()}</ul>
+            <div>Loading...</div>
         )
     }
+
+    return (
+        <div style={{ float: 'left', width: '80%', paddingLeft: '20px' }}>
+            <List>{renderList(props)}</List>
+        </div>    
+    )
 }
+
+const renderList = (props: Props) => props.newsList.map((news) => (
+    <NewsItem key={news.id} news={news} putNewsDetail={props.putNewsDetail} />
+))

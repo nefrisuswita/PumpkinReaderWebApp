@@ -2,21 +2,22 @@ import * as React from 'react'
 import * as ReactDOM from 'react-dom' 
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
-import { BrowserRouter } from 'react-router-dom'
+import { Router } from 'react-router-dom'
 import thunk from 'redux-thunk'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 import { App } from './containers/App'
 import { rootReducer } from './reducers'
+import { browserHistory } from './browserHistory'
 
-const ReduxPromise = require("redux-promise")
-
-const middleware = [ ReduxPromise ]
 const createStoreWithMiddleware = createStore(rootReducer, applyMiddleware(thunk))
 
 ReactDOM.render(
   <Provider store={createStoreWithMiddleware}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <Router history={browserHistory}>
+      <MuiThemeProvider>
+        <App />
+      </MuiThemeProvider>
+    </Router>
   </Provider>
   , document.querySelector('.container'))

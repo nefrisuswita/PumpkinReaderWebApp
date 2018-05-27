@@ -1,11 +1,6 @@
 export class Comment {
-    id: number
-    by: String
-    comment: Comment[]
-    text: String
-    time: number
-
-    constructor(id: number, by: String, comment: Comment[], text: String, time: number) {
+    constructor(public id: number, public by: string, public comment: Comment[], public text: string, 
+        public time: number) {
         this.id = id
         this.by = by
         this.comment = comment
@@ -13,7 +8,7 @@ export class Comment {
         this.time = time
     }
 
-    static getNews(id: number, by: String, comment: Comment[], text: String, time: number): Comment {
+    static getNews(id: number, by: string, comment: Comment[], text: string, time: number): Comment {
         return new Comment(id, by, comment, text, time)
     }
 

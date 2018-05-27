@@ -1,36 +1,36 @@
 import * as React from 'react'
 import { Route, Switch, withRouter, match } from 'react-router'
 
-import NewsListFragment from './NewsListFragment'
-import SavedNewsFragment from './SavedNewsFragment'
-import NewsDetailFragment from './NewsDetailFragment'
+import HNNewsListPage from './HNNewsListPage'
+import SavedNewsListPage from './SavedNewsListPage'
+import NewsDetailPage from './NewsDetailPage'
 
 const routes = [
   {
     path: '/',
     exact: true, 
-    render: () => <NewsListFragment />
+    render: () => <HNNewsListPage />
   },
   {
     path: '/saved',
     exact: true, 
-    render: () => <SavedNewsFragment />
+    render: () => <SavedNewsListPage />
   },
   {
     path: '/:id',
     exact: true, 
     render: ({ match }: { match: match<any> }) => (
-        <NewsDetailFragment id={decodeURIComponent(match.params.id || '')} />
+        <NewsDetailPage id={parseInt(match.params.id)} />
     )
   }
 ]
 
 export const App = withRouter(() => (
-  <div>
+  // <div style={{ backgroundColor: '#ef6c02' }}>
     <Switch>
         {routes.map((route, i) => 
           <Route key={i} exact={route.exact} path={route.path} render={route.render} />
         )}
     </Switch> 
-  </div> 
+  // </div>
 ))

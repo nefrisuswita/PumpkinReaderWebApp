@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { categoryNewsList, savedNews, newsDetail } from './News' 
+import { categoryNewsList, savedNews, newsDetail, NewsDetail } from './News' 
 import { chosenCategory } from './Category'
 import { News } from '../entities/News'
 
@@ -14,5 +14,5 @@ export interface ReducerState {
     action: String, 
     newsList: News[],
     savedNews: News[],
-    newsDetail: News
+    newsDetail: NewsDetail
 }
